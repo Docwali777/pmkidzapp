@@ -1,12 +1,29 @@
 {
   "name": "pmkidzapp",
-  "displayName": "pmkidzapp",
+  "displayName": "PM KIDZ",
   "expo": {
-    "name": "pmkidzapp",
+    "name": "PM KIDZ",
+    "icon": "./_Images/iTunesArtwork@2x.png",
     "slug": "pmkidzapp",
-    "version": "1.0.0",
+    "version": "1.4.5",
+    "splash":{
+      "image":  "./_Images/logo800x800_steth.png", 
+      "resizeMode": "cover"
+    },
+    "updates":{
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ], 
+    "ios":{
+      "supportsTablet": true,
+      "bundleIdentifier": "org.name.pmkidzapp", 
+      "buildNumber": "1.4.5"
+    }, 
+    "android":{
+      "package": "com.pmkidz.initialApp",
+      "versionCode": 9
+    }
   }
 }
