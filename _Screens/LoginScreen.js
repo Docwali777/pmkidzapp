@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, userEffect } from "react";
 import {
     View,
     Text,
     StyleSheet,
     Image, 
-    TouchableOpacity
+    TouchableOpacity, 
+    Keyboard
 } from "react-native"
 import firebase from "../_FIREBASE/firebase.config"
 
@@ -12,21 +13,26 @@ import firebase from "../_FIREBASE/firebase.config"
 import LogoWithStethescope from "../_Images/LogoStethscope_800x800.png"
 
 //Component
-import ButtonComponent  from "./ReUsable/ButtonComponent"
-import InputComponent  from "./ReUsable/InputConponent"
+import ButtonComponent  from "../_Components/ReUsable/ButtonComponent_with_ICON"
+import InputComponent  from "../_Components/ReUsable/InputConponent"
+import AuthComponentButton from "../_Components/AuthComponent"
 
 
-function LoginComponent({navigation}){
-
+function LoginComponent({navigation, route}){
 
 
     const [email, setEmail] = useState("")
+    const [password, setPassword] =useState("")
+    
 
     const authorized = ()=>{
-        navigation.navigate("User")
+        
+        console.log({email, password});
+
+        // navigation.navigate("User")
     }
 
-    console.log(email);
+
     return (
         <View style={styles.container}>
            
@@ -35,20 +41,41 @@ function LoginComponent({navigation}){
            <Text style={{fontSize: 25}}>Login</Text>
 
            <InputComponent 
+                onSubmitEditing={() =>{
+                    console.log(2);
+                    Keyboard.dismiss()
+                }}
+                blurOnSubmit={false}
                 placeholder="Email@xyz.com"
                 value={email}
-                onChangeText={email => setEmail(email)}
+                onChangeText={emailText => {
+                    Keyboard
+                    setEmail(emailText)
+                }}
+                autoCorrect={false}
+                autoCapitalize="none"
+                // onSubmitEditing={Keyboard.dismiss}
+                autoFocus={true}
+                returnKeyLabel="done"
+                keyboardType="email-address"
+                
                 
            />
 
             <InputComponent 
                 placeholder="Password"
-                vale={""}
+                autoCapitalize="none"
+                value={password}
+                onChangeText={password=> setPassword(password)}
+                autoCompleteType="password"
+                secureTextEntry
 
             />   
-            <TouchableOpacity onPress={authorized} style={styles.submitButtonContainer}>
-                <Text>Submit</Text>
-            </TouchableOpacity>
+
+
+            <AuthComponentButton loginInfo={{email, password}} />
+
+        
        
     </View>
     )
@@ -58,6 +85,7 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1, 
         alignItems: "center",
+        justifyContent: "center",
         paddingTop: 10, 
         // backgroundColor: "#FFE792"
     },
@@ -92,6 +120,13 @@ const styles = StyleSheet.create({
         }, 
         shadowRadius:5, 
 
+    }, 
+    registerView:{
+        flexDirection: "row"
+    }, 
+    registerText: {
+        color: "blue", 
+        fontWeight: "bold"
     }
    
 })

@@ -1,61 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, userEffect } from "react";
 import {
     View,
     Text,
     StyleSheet,
     Image, 
-    TouchableOpacity
+    TouchableOpacity, 
+    Keyboard
 } from "react-native"
 import firebase from "../_FIREBASE/firebase.config"
 
 //images
 import LogoWithStethescope from "../_Images/LogoStethscope_800x800.png"
 
-
 //Component
-import ButtonComponent  from "./ReUsable/ButtonComponent_with_ICON"
-import InputComponent  from "./ReUsable/InputConponent"
+import ButtonComponent  from "../_Components/ReUsable/ButtonComponent_with_ICON"
+import InputComponent  from "../_Components/ReUsable/InputConponent"
+import AuthComponentButton from "../_Components/AuthComponent";
 
-import AuthComponentButton from "./AuthComponent";
 
-
-function RegisterComponent({ navigation } ){
-
+function RegisterComponent({navigation, route}){
+   console.log("register");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] =useState("")
     
 
-    const [email, setEmail] = useState("")
-    const [passsword, setPassword] = useState("")
-
     const authorized = ()=>{
-        navigation.navigate("User")
+        
+        console.log({email, password});
+
+        // navigation.navigate("User")
     }
 
 
     return (
         <View style={styles.container}>
-       
+           
            <Image style={styles.image} source={LogoWithStethescope} />
             
            <Text style={{fontSize: 25}}>Register</Text>
 
-
            <InputComponent 
+                onSubmitEditing={() =>{
+                    console.log(2);
+                    Keyboard.dismiss()
+                }}
+                blurOnSubmit={false}
                 placeholder="Email@xyz.com"
                 value={email}
-                onChangeText={email => setEmail(email)}
+                onChangeText={emailText => {
+                    Keyboard
+                    setEmail(emailText)
+                }}
+                autoCorrect={false}
+                autoCapitalize="none"
+                autoFocus={true}
+                returnKeyLabel="done"
                 keyboardType="email-address"
-                // autoCompleteType="none"
+                
                 
            />
 
             <InputComponent 
                 placeholder="Password"
-                value={passsword}
-                onChangeText={password=>setPassword(password)}
+                value={password}
+                onChangeText={password=> setPassword(password)}
+                autoCapitalize="none"
+                secureTextEntry
 
             />   
 
-          <AuthComponentButton registerInfo={{email, password}} />
+
+                <AuthComponentButton registerInfo={{email, password}}  />
+        
+
+            
        
     </View>
     )
@@ -66,6 +84,7 @@ const styles = StyleSheet.create({
         // flex: 1, 
         alignItems: "center",
         paddingTop: 10, 
+        justifyContent: "center",
         // backgroundColor: "#FFE792"
     },
     image: {
@@ -99,7 +118,8 @@ const styles = StyleSheet.create({
         }, 
         shadowRadius:5, 
 
-    }
+    }, 
+
    
 })
 

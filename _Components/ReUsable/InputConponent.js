@@ -4,6 +4,7 @@ import {  View , Text, TextInput, Button, StyleSheet } from 'react-native';
 // import {borderStyle} from '../../Constants/Constants'
 
 function InputWithLabelComponent(props){
+  
   return (
     <View >
 
@@ -15,12 +16,12 @@ function InputWithLabelComponent(props){
   
                   />
               </View>
-              {props.label !== undefined ?
+              {/* {props.label !== undefined ?
                 <View style={[styles.titleContainer,{height: props.numberOfLines !== undefined ? props.numberOfLines * 100  : null}]}>
                     <Text style={styles.titleText}>{props.label} </Text>
-                </View> :
-                <View></View>
-              }
+                </View> : */}
+               
+              {/* } */}
       </View>
   )
 }

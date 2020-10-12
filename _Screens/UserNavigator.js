@@ -3,29 +3,26 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button, Linking, Platform, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
+
+//Screens
+import UserHomeScreen from "./UserNavigatorScreens/UserHomeScreen"
+import LoadingScreen from "./UserNavigatorScreens/WelcomeScreen"
+
+import DiaryScreen from "./UserNavigatorScreens/DiaryScreen_NAV"
+
 const Tabs = createBottomTabNavigator()
-const DiaryTabs =createStackNavigator()
+const DiaryTabs = createStackNavigator()
 
-function DiaryList({navigation}){
-  return <Text onPress={()=> navigation.navigate("Me")}>List</Text>
-}
-function Me({navigation}){
-  console.log(navigation);
-  return <Text onPress={()=>navigation.goBack()} >const [state, dispatch] = useReducer(reducer, initialState, init)</Text>
-}
 
-function diary(){
-    return (
-      <DiaryTabs.Navigator>
-      <DiaryTabs.Screen name="List" component={DiaryList} />
-      <DiaryTabs.Screen name="Me" component={Me} />
-  </DiaryTabs.Navigator>
-    )
-}
+
+
 function Medications(props){
     return (
         <View>
@@ -34,9 +31,6 @@ function Medications(props){
     )
 }
 
-function Home(){
-  return <Text>Home</Text>
-}
 
 function UserScreen() {
   
@@ -54,6 +48,8 @@ function UserScreen() {
           iconName = 'ios-list';
         } else if (route.name === 'Diary') {
           iconName = "ios-book"
+        } else if(route.name === "Welcome"){
+          iconName = "ios-heart"
         }
 
         // You can return any component that you like here!
@@ -65,10 +61,10 @@ function UserScreen() {
       inactiveTintColor: 'gray',
     }}
     >
-
-          <Tabs.Screen name="Home"  component={Home}/>
-            <Tabs.Screen name="Diary" component={diary}/>
-            <Tabs.Screen name="Medication" component={Medications}/>
+          <Tabs.Screen name="Welcome"   component={LoadingScreen} />
+          {/* <Tabs.Screen name="Home"  component={UserHomeScreen}/> */}
+            <Tabs.Screen screenOptions={{tabBarVisible: false}} name="Diary" component={DiaryScreen}/>
+            {/* <Tabs.Screen name="Medication" component={Medications}/> */}
     </Tabs.Navigator>
   );
 }

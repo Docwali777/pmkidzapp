@@ -1,7 +1,7 @@
 import React from "react"
 
 //components
-import ButtonComponent from "../_Components/ReUsable/ButtonComponent"
+import ButtonComponent from "../_Components/ReUsable/ButtonComponent_with_ICON"
 
 //images
 import pmkidz_positve_wall from '../_Images/pmkidz_positve_wall.png'
@@ -23,7 +23,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 function MainScreen({navigation}){
-
+console.log();"Main"
     const callOffice = () =>{
         Linking.openURL("tel:12405857128")
             .catch(e =>console.log("error calling office"))
@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         paddingTop: 40,  
         alignItems: "center",
-        backgroundColor: "#FFE792"
+        // backgroundColor: "#FFE792"
+        backgroundColor: "#1f4898", 
     }, 
     divider: {
         borderWidth: 1, 
